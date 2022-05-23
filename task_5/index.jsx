@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 // our redux state
 reduxState = {
@@ -10,7 +10,7 @@ reduxState = {
 }
 
 const MainComponent = () => {
-    const userData = useSelector(reduxState => reduxState.userData); // subscribe and get only userData object
+    const userData = useSelector(reduxState => reduxState.userData, shallowEqual); // subscribe and get only userData object
 
     // ... other code
 };

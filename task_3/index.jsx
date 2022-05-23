@@ -1,14 +1,17 @@
-import { useState, Fragment, memo } from 'react';
+import { useState, useMemo, Fragment, memo } from 'react';
 
 const MainComponent = ({
     user = { name: 'unknown', age: null } // default value for `props.user`
 }) => {
-    const [ _, updateComponent ] = useState(); // change state for force component updating
+    const [_, updateComponent] = useState(); // change state for force component updating
+    // данные пользователя мемоизируются на основании примитивных значений полей
+    const memoizedUser = useMemo(() => ({ ...user }), [user.name, user.age]);
 
     return (
         <Fragment>
             <button onClick={updateComponent}>update MainComponent</button>
-            <ChildComponent user={user} />
+            {/* в пропсы передается мемоизированное значение */}
+            <ChildComponent user={memoizedUser} />
         </Fragment>
     );
 };

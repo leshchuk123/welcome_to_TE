@@ -51,3 +51,24 @@ const tileArr: Array<ITile> = [
 
 // write You code here
 // const result: IResult = ...
+const calc = (tiles: ITile[]): IResult => {
+  let totalPriceSum = 0;
+  let tileCount = 0;
+  let averagePriceSum = 0;
+
+  const active = tiles.filter(tile => tile.isActive);
+  totalPriceSum = active.map(tile => tile.price).reduce((prev, curr) => prev + curr, 0);
+  tileCount = active.length;
+  averagePriceSum = totalPriceSum / tileCount;
+  // или за одну итерацию и без промежуточного массива: 
+  // tiles.forEach(tile => {
+  //   if (tile.isActive) {
+  //     tileCount++;
+  //     totalPriceSum += tile.price;
+  //   }
+  // });
+
+  return { totalPriceSum, tileCount, averagePriceSum };
+}
+
+const result: IResult = calc(tileArr);
